@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url({% static 'assets/images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
+    <div class="ht__bradcaump__wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title">Blog Details</h2>
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" href="index.html">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb-item active">right sidebar</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<!-- Start Our Blog Area -->
+<section class="blog-details-wrap ptb--120 bg__white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                <div class="blog-details-left-sidebar">
+                    <div class="blog-details-top">
+                        <!--Start Blog Thumb -->
+                        <div class="blog-details-thumb-wrap">
+                            <div class="blog-details-thumb">
+                                <img src="{{ blog.image.url }}" alt="blog images">
+                            </div>
+                            <div class="upcoming-date">
+                                {{blog.created_at|date:"d"}}<span
+                                    class="upc-mth">{{blog.created_at|date:"M , Y"}}</span>
+                            </div>
+                        </div>
+                        <!--End Blog Thumb -->
+                        <h2>{{blog.title}}</h2>
+                        <div class="blog-admin-and-comment">
+                            <p>BY : <a href="#">{{blog.author.username}}</a></p>
+                            <p class="separator">|</p>
+                            <p>{{blog.comments.count}} COMMENTS</p>
+                        </div>
+                        <!-- Start Blog Pra -->
+                        <div class="blog-details-pra">
+                            <p>{{blog.text}}</p>
+                        </div>
+                        <!-- End Blog Pra -->
+                        <!-- Start Blog Tags -->
+                        <div class="postandshare">
+                            <div class="post">
+                                <p>TAGS :
+                                    {%for tag in blog.tag.all%}
+                                    {{tag.title}}
+                                    {%endfor%}
+                                </p>
+                            </div>
+                            <div class="blog-social-icon">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Blog Tags -->
+                        <!-- Start Blog Comment Area -->
+                        <div class="our-blog-comment mt--20">
+                            <div class="blog-comment-inner">
+                                <h2 class="section-title-2">COMMENTS {{blog.comments.count}}</h2>
+                                <!-- Start Single Comment -->
+                                {%for comment in parent_comments %}
+                                <div class="single-blog-comment">
+                                    <div class="blog-comment-thumb">
+                                        <img src="{{comment.user.profile_picture}}" alt="comment images">
+                                    </div>
+                                    <div class="blog-comment-details">
+                                        <div class="comment-title-date">
+                                            
+                                            <h2><a href="#">{{comment.user.username}} </a></h2>
+                                            
+                                            <div class="reply">
+                                                <p>{{comment.created_at|date:"d M Y"}} / <a href="#" class="reply-comment" comment_id = {{comment.id}}>REPLY</a></p>
+                                            </div>
+                                        </div>
+                                        <p>{{comment.text}}</p>
+                                    </div>
+                                </div>
+                                <!-- End Single Comment -->
+                                    <!-- Start Single Comment -->
+                                    {%for reply in comment.sub_comments.all%}
+                                    <div class="single-blog-comment comment-reply">
+                                        <div class="blog-comment-thumb">
+                                            <img src="{{reply.user.profile_picture}}" alt="comment images">
+                                        </div>
+                                        <div class="blog-comment-details">
+                                            <div class="comment-title-date">
+                                                
+                                                <h2><a href="#">{{reply.user.username}}</a></h2>
+                                               
+                                                <div class="reply">
+                                                    <p>{{reply.created_at|date:"d M Y"}} / <a href="#" class="reply-comment" comment_id = {{comment.id}} >REPLY</a></p>
+                                                </div>
+                                            </div>
+                                            <p>{{reply.text}}</p>
+                                        </div>
+                                    </div>
+                                    {%endfor%}
+                                {%endfor%}
+                                <!-- End Single Comment -->
+                            </div>
+                        </div>
+                        <!-- End Blog Comment Area -->
+                        <!-- Start Reply Form -->
+                        {% if user.is_authenticated %}
+                        <form action="" method="POST">
+                            <div class="our-reply-form-area mt--20">
+                                <h2 class="section-title-2">LEAVE A REPLY</h2>
+                                <div class="reply-form-inner mt--40">
+                                    <div class="reply-form-box">
+                                        
+                                        {% csrf_token %}
+                                        {{form.text}}
+                                        {% for error in form.text.errors %}
+                                            <li class="alert-danger">{{ error }}</li>
+                                        {% endfor %}
+                                        {{form.parent_comment}}
+    
+                                    </div>
+                                    <div class="blog__details__btn">
+                                        <input type="submit" class="htc__btn btn--gray" value="submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        {% endif %}
+                        <!-- End Reply Form -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 smt-30 xmt-40">
+                <div class="blod-details-right-sidebar">
+                    <div class="category-search-area">
+                        <input placeholder="Search......" type="text">
+                        <a class="srch-btn" href="#"><i class="zmdi zmdi-search"></i></a>
+                    </div>
+                    <!-- Start Category Area -->
+                    <div class="our-category-area mt--60">
+                        <h2 class="section-title-2">CATEGORY</h2>
+                        <ul class="categore-menu">
+                            {%for category in blog_categories%}
+                            <li><a href="#"><i class="zmdi zmdi-caret-right"></i>{{category.title}}<span>{{category.blog.count}}</span></a>
+                            </li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+                    <!-- End Category Area -->
+                    <!-- Start Letaest Blog Area -->
+                    <div class="our-recent-post mt--60">
+                        <h2 class="section-title-2">LATEST POST</h2>
+                        <div class="our-recent-post-wrap">
+                            {%for post in latest_posts%}
+                            <!-- Start Single Post -->
+                            <div class="single-recent-post">
+                                <div class="recent-thumb">
+                                    <a href="blog-details.html"><img src="{% static 'assets/images/blog/sm-img/1.jpg'%}"
+                                            alt="post images"></a>
+                                </div>
+                                <div class="recent-details">
+                                    <div class="recent-post-dtl">
+                                        <h6><a href="blog-details.html">{{post.title}}</a></h6>
+                                    </div>
+                                    <div class="recent-post-time">
+                                        <p>{{post.created_at|date:"d M Y"}}</p>
+                                        <p class="separator">|</p>
+                                        <p>{{post.created_at|date:"H : i"}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Post -->
+                            {%endfor%}
+                        </div>
+                    </div>
+                    <!-- End Letaest Blog Area -->
+                    <!-- Start Tag -->
+                    <div class="our-blog-tag">
+                        <h2 class="section-title-2">TAGS</h2>
+                        <ul class="tag-menu mt-40">
+                            {%for tag in blog_tags%}
+                            <li><a href="#">{{tag.title}}</a></li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+                    <!-- End Tag -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Our Blog Area -->
+
+
+<!-- Body main wrapper end -->
+<!-- Placed js at the end of the document so the pages load faster -->
+
+{% endblock %}
+
+{% block js %}
+<script>
+	$(document).ready(function () {
+		$(document).on("click", ".reply-comment", function (event) {
+			event.preventDefault();
+			let comment_id = $(this).attr('comment_id');
+			$('#id_parent_comment').val(comment_id);
+			console.log(comment_id);});
+	});
+</script>
+{%endblock%}

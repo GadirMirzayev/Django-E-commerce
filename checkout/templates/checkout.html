@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area"
+    style="background: rgba(0, 0, 0, 0) url({% static 'assets/images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
+    <div class="ht__bradcaump__wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title">Checkout</h2>
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" href="index.html">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb-item active">Checkout</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<!-- Start Checkout Area -->
+<section class="our-checkout-area ptb--120 bg__white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-8">
+                <div class="ckeckout-left-sidebar">
+                    <!-- Start Checkbox Area -->
+                    <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="checkout-form">
+                                <h2 class="section-title-3">Billing details</h2>
+                                <div class="checkout-form-inner">
+                                    <div class="single-checkout-box">
+                                        {{form.first_name}}
+                                        {% for error in form.first_name.errors %}
+                                        <li class="alert-danger">{{ error }}</li>
+                                        {% endfor %}
+                                        
+                                        {{form.last_name}}
+                                        {% for error in form.last_name.errors %}
+                                        <li class="alert-danger">{{ error }}</li>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="single-checkout-box">
+                                        {{form.email}}
+                                        {{form.email.errors}}
+                                        {{form.phone}}
+                                        {{form.phone.errors}}
+                                    </div>
+                                    <div class="single-checkout-box">
+                                        {{form.message}}
+                                        {{form.message.errors}}
+                                    </div>
+                                    <div class="single-checkout-box select-option mt--40">
+                                        {{form.country}}
+                                        {{form.country.errors}}
+                                        {{form.company_name}}
+                                        {{form.company_name.errors}}
+                                    </div>
+                                    <div class="single-checkout-box">
+                                        {{form.state}}
+                                        {{form.state.errors}}
+                                        {{form.zip_code}}
+                                        {{form.zip_code.errors}}
+                                    </div>
+                                    <div class="single-checkout-box checkbox">
+                                        <input id="remind-me" type="checkbox">
+                                        <label for="remind-me"><span></span>Create a Account ?</label>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <!-- End Checkbox Area -->
+                        <!-- Start Payment Box -->
+                        <div class="payment-form">
+                            <h2 class="section-title-3">payment details</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur kgjhyt</p>
+                            <div class="payment-form-inner">
+                                <div class="single-checkout-box">
+                                    {{form.name_on_card}}
+                                    {{form.name_on_card.errors}}
+                                    {{form.card_number}}
+                                    {{form.card_number.errors}}
+                                </div>
+                                <div class="single-checkout-box select-option">
+
+                                    {{form.date}}
+                                    {% for error in form.date.errors %}
+                                        <li class="alert-danger">{{ error }}</li>
+                                    {% endfor %}
+                                   
+                                    {{form.security_code}}
+                                    {% for error in form.security_code.errors %}
+                                        <li class="alert-danger">{{ error }}</li>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" value="submit">
+                    </form>
+                    <!-- End Payment Box -->
+                    <!-- Start Payment Way -->
+                    <div class="our-payment-sestem">
+                        <h2 class="section-title-3">We Accept :</h2>
+                        <ul class="payment-menu">
+                            <li><a href="#"><img src="{% static 'assets/images/payment/1.jpg' %}" alt="payment-img"></a>
+                            </li>
+                            <li><a href="#"><img src="{% static 'assets/images/payment/2.jpg' %}" alt="payment-img"></a>
+                            </li>
+                            <li><a href="#"><img src="{% static 'assets/images/payment/3.jpg' %}" alt="payment-img"></a>
+                            </li>
+                            <li><a href="#"><img src="{% static 'assets/images/payment/4.jpg' %}" alt="payment-img"></a>
+                            </li>
+                            <li><a href="#"><img src="{% static 'assets/images/payment/5.jpg' %}" alt="payment-img"></a>
+                            </li>
+                        </ul>
+                        <div class="checkout-btn">
+                            <a class="ts-btn btn-light btn-large hover-theme" href="#">CONFIRM & BUY NOW</a>
+                        </div>
+                    </div>
+                    <!-- End Payment Way -->
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="checkout-right-sidebar">
+                    <div class="our-important-note">
+                        <h2 class="section-title-3">Note :</h2>
+                        <p class="note-desc">Lorem ipsum dolor sit amet, consectetur adipisici elit, sed do eiusmod
+                            tempor incididunt ut laborekf et dolore magna aliqua.</p>
+                        <ul class="important-note">
+                            <li><a href="#"><i class="zmdi zmdi-caret-right-circle"></i>Lorem ipsum dolor sit amet,
+                                    consectetur nipabali</a></li>
+                            <li><a href="#"><i class="zmdi zmdi-caret-right-circle"></i>Lorem ipsum dolor sit amet</a>
+                            </li>
+                            <li><a href="#"><i class="zmdi zmdi-caret-right-circle"></i>Lorem ipsum dolor sit amet,
+                                    consectetur nipabali</a></li>
+                            <li><a href="#"><i class="zmdi zmdi-caret-right-circle"></i>Lorem ipsum dolor sit amet,
+                                    consectetur nipabali</a></li>
+                            <li><a href="#"><i class="zmdi zmdi-caret-right-circle"></i>Lorem ipsum dolor sit amet</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="puick-contact-area mt--60">
+                        <h2 class="section-title-3">Quick Contract</h2>
+                        <a href="phone:+8801722889963">+012 345 678 102 </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Checkout Area -->
+</div>
+<!-- Body main wrapper end -->
+<!-- Placed js at the end of the document so the pages load faster -->
+
+{% endblock %}
